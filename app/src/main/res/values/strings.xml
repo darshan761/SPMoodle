@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Moodle</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="backtologin">Back</string>
+    <string name="password_here">Password here</string>
+    <string name="e_mail">E-mail</string>
+    <string name="uid">UID</string>
+    <string name="home">HOME</string>
+    <string name="course">COURSE</string>
+    <string name="settings">SETTING</string>
+    <string name="logout">LOGOUT</string>
+    <string name="about">ABOUT US</string>
+    <string-array name="category">
+        <item>Professor</item>
+        <item>Student</item>
+    </string-array>
+    <string-array name="dept">
+        <item>Comps</item>
+        <item>IT</item>
+        <item>EXTC</item>
+        <item>ETRX</item>
+    </string-array>
+    <string name="title_activity_moodle_home">Moodle_home</string>
+</resources>
