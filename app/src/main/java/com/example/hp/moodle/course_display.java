@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,6 +20,7 @@ public class course_display extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,17 +32,21 @@ public class course_display extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
+
         ref.child("course").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                 for(DataSnapshot x:  dataSnapshot.getChildren()) {
-                     mDataset.add(x.getValue(Course.class));
-                 }
-                Course[] myDataset = new Course[10];
-                myDataset = mDataset.toArray(myDataset);
+                Log.e("Count " ,""+dataSnapshot.getChildrenCount());
+                for(DataSnapshot x: dataSnapshot.getChildren()) {
+                    Course c = x.getValue(Course.class);
+                    mDataset.add(c);
+                    mAdapter = new MyAdapter(mDataset);
+                    mRecyclerView.setAdapter(mAdapter);
+                    Log.d("nme", c.getName());
+                }
+
                 // specify an adapter (see also next example)
-                mAdapter = new MyAdapter(myDataset);
-                mRecyclerView.setAdapter(mAdapter);
+
             }
 
             @Override

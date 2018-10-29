@@ -19,6 +19,7 @@ public class Course {
     }
 
     Course(){}
+
     public String getName() {
         return name;
     }
