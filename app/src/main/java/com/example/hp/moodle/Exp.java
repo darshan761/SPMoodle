@@ -32,13 +32,23 @@ public class Exp extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("Course").addValueEventListener(new ValueEventListener() {
+        ref.child("course").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                   for(DataSnapshot x : dataSnapshot.getChildren()){
-                      Log.d("boibo","ers8urhjyub");
+
                       if(x.child("name").getValue().toString().equals(c_nme)){
+
                           noo = Integer.parseInt(x.child("exp_no").getValue().toString());
+                          Log.d("boibo",Integer.toString(noo));
+                          ArrayList<String>  mdataset = new ArrayList<String>();
+                          for(int i = 1;i<=noo;i++){
+                              mdataset.add("Experiment No:"+i);
+
+                          }
+
+                          mAdapter = new MyAdapter2(mdataset);
+                          mRecyclerView.setAdapter(mAdapter);
 
                       }
                   }
@@ -50,11 +60,6 @@ public class Exp extends AppCompatActivity {
             }
         });
 
-         ArrayList<String>  mdataset = new ArrayList<String>();
-         for(int i = 1;i<=noo;i++){
-             mdataset.set(i-1,"Experiment No:"+i);
-         }
-        mAdapter = new MyAdapter2(mdataset);
-        mRecyclerView.setAdapter(mAdapter);
+
     }
 }
