@@ -19,7 +19,7 @@
         android:text="Darshan"
         android:textStyle="bold"
         android:textColor="@android:color/black"
-        android:textSize="34dp"
+        android:textSize="26dp"
         android:padding="2dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 

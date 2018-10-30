@@ -1,4 +1,11 @@
 <TextView
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:gravity="center"
+    android:textColor="#040404"
+    android:typeface="sans"
+    android:background="@color/colorPrimary"
+    android:layout_marginTop="20dp"
+    android:textSize="30dip"
+    android:textStyle="bold"
     xmlns:android="http://schemas.android.com/apk/res/android" />

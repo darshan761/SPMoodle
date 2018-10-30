@@ -88,12 +88,12 @@ public class Login extends AppCompatActivity {
         if(user != null) {
             Toast.makeText(getApplicationContext(),"Login SuccessFull",Toast.LENGTH_SHORT).show();
             if(spinner.getSelectedItem().equals("Student")) {
-                Intent i = new Intent(this, studentHomepge.class);
+                Intent i = new Intent(this, Home.class);
                 startActivity(i);
                 progressBar.setVisibility(View.GONE);
             }
             if(spinner.getSelectedItem().toString().equals("Professor")){
-                Intent i = new Intent(this, Home.class);
+                Intent i = new Intent(this, studentHomepge.class);
                 startActivity(i);
                 progressBar.setVisibility(View.GONE);
             }

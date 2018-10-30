@@ -1,5 +1,8 @@
 package com.example.hp.moodle;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,11 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class studentHomepge extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-
+    FirebaseAuth mauth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +31,10 @@ public class studentHomepge extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        Intent i = new Intent(studentHomepge.this, course_display.class);
-        startActivity(i);
-        finish();
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View h = navigationView.getHeaderView(0);
+        TextView userr = (TextView)h.findViewById(R.id.head_email);
+        userr.setText(mauth.getCurrentUser().getEmail().toString());
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -37,21 +44,36 @@ public class studentHomepge extends AppCompatActivity {
                         // close drawer when item is tapped
                         mDrawerLayout.closeDrawers();
                        if (menuItem.getItemId()==R.id.nav_home){
-                           Intent i = new Intent(studentHomepge.this, create.class);
+                           Intent i = new Intent(studentHomepge.this, course_display.class);
                            startActivity(i);
-                           finish();
+
                        }
-                        if (menuItem.getItemId()==R.id.create_course){
+                        if (menuItem.getItemId()==R.id.nav_course){
                             Intent i = new Intent(studentHomepge.this, create.class);
                             startActivity(i);
-                            finish();
+
                         }
                         if (menuItem.getItemId()==R.id.nav_settings){
                             Intent i = new Intent(studentHomepge.this, Personal.class);
                             startActivity(i);
-                            finish();
+
                         }
-                        if (menuItem.getItemId()==R.id.logout){
+                        if (menuItem.getItemId()==R.id.nav_logout){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(studentHomepge.this);
+                            builder.setMessage("Are you sure you want to exit?")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            finish();
+                                        }
+                                    })
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+                            AlertDialog alert = builder.create();
+                            alert.show();
 
                         }
                         if (menuItem.getItemId()==R.id.about){
@@ -65,6 +87,7 @@ public class studentHomepge extends AppCompatActivity {
                     }
                 });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

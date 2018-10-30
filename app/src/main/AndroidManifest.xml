@@ -30,7 +30,9 @@
         <activity android:name=".viewcourse" />
         <activity android:name=".Personal" />
         <activity android:name=".about" />
-        <activity android:name=".create"></activity>
+        <activity android:name=".create" />
+        <activity android:name=".enrolled" />
+        <activity android:name=".Exp"></activity>
     </application>
 
 </manifest>

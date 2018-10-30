@@ -85,7 +85,7 @@ public class SignUp extends AppCompatActivity {
                                             DatabaseReference my = myRef.child("Professor").child(name);
                                             my.setValue(p);
                                             Toast.makeText(SignUp.this, "You selected Professor", Toast.LENGTH_SHORT).show();
-                                            Intent i = new Intent(SignUp.this, Homepge.class);
+                                            Intent i = new Intent(SignUp.this, Home.class);
                                             startActivity(i);
 
                                         }
