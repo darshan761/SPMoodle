@@ -15,6 +15,7 @@ import java.util.ArrayList;
  */
 public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
     private ArrayList<String> mDataset ;
+    private String course_nme;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -30,8 +31,9 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter2(ArrayList<String> myDataset) {
+    public MyAdapter2(ArrayList<String> myDataset,String c) {
         mDataset = myDataset;
+        course_nme = c;
     }
 
     // Create new views (invoked by the layout manager)
@@ -48,7 +50,7 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.mTextView.setText(mDataset.get(position));
@@ -56,6 +58,8 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent i  = new Intent(v.getContext(),grade.class);
+                i.putExtra("MEME",course_nme);
+                Log.d("gigigi",course_nme);
                 v.getContext().startActivity(i);
             }
         });

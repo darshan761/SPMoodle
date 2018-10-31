@@ -28,6 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private ArrayList<Course> mDataset ;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     int count = 0;
+    int no;
     String i;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -74,7 +75,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
          i = mDataset.get(position).getName();
@@ -109,6 +110,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                         DatabaseReference r = Ref.child("enrolled").push();
                         r.child("student_email").setValue(auth.getCurrentUser().getEmail());
                         r.child("enrolled_course").setValue(mDataset.get(position).getName());
+                        final DatabaseReference href = Ref.child("Exp").child(holder.mTextView.getText().toString()).push();
+                        Ref.child("course").orderByChild("name").equalTo(holder.mTextView.getText().toString()).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for(DataSnapshot x : dataSnapshot.getChildren()) {
+                                    no = Integer.parseInt(x.child("exp_no").getValue().toString());
+                                    for (int i = 1; i <= no; i++) {
+                                        href.child("EXP:" + i).child("student_name").setValue(auth.getCurrentUser().getEmail().toString());
+                                    }
+                                }}
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                         Toast.makeText(v.getContext(), "Enrolled successfully", Toast.LENGTH_SHORT).show();
                     } else {
                         Intent i = new Intent(v.getContext(), Exp.class);

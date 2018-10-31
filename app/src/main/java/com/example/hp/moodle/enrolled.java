@@ -18,7 +18,9 @@ public class enrolled extends AppCompatActivity {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
+    private int no;
     private RecyclerView.LayoutManager mLayoutManager;
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,18 +31,16 @@ public class enrolled extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("enrolled").addValueEventListener(new ValueEventListener() {
+
+         ref.child("enrolled").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot x:dataSnapshot.getChildren()){
-                    if(x.child("student_email").getValue().toString().equals(auth.getCurrentUser().getEmail())){
-                         mdataset.add(x.child("enrolled_course").getValue().toString());
+                    if(x.child("student_email").getValue().toString().equals(auth.getCurrentUser().getEmail())) {
+                        mdataset.add(x.child("enrolled_course").getValue().toString());
                         mAdapter = new MyAdapter1(mdataset);
                         mRecyclerView.setAdapter(mAdapter);
-                    }
-                }
-            }
+                    }}}
 
             @Override
             public void onCancelled(DatabaseError databaseError) {

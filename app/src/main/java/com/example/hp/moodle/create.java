@@ -49,10 +49,6 @@ public class create extends AppCompatActivity {
                                 c.setDesp(desp.getText().toString());
                                 c.setProf(x.child("name").getValue().toString());
                                 ref.child("course").push().setValue(c);
-                                DatabaseReference href = ref.child("Exp").child(cname.getText().toString()).push();
-                                for(int i=1;i<=Integer.parseInt(no.getText().toString());i++) {
-                                    href.child("EXP:" + i).child("student_name").setValue(auth.getCurrentUser().getEmail().toString());
-                                }
                                 Toast.makeText(create.this,"Course added Successfully",Toast.LENGTH_LONG).show();
                                 cname.setText("");
                                 no.setText("");

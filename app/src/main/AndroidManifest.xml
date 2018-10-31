@@ -32,7 +32,8 @@
         <activity android:name=".about" />
         <activity android:name=".create" />
         <activity android:name=".enrolled" />
-        <activity android:name=".Exp"></activity>
+        <activity android:name=".Exp" />
+        <activity android:name=".grading"></activity>
     </application>
 
 </manifest>

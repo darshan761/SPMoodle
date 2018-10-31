@@ -47,7 +47,7 @@ public class Exp extends AppCompatActivity {
 
                           }
 
-                          mAdapter = new MyAdapter2(mdataset);
+                          mAdapter = new MyAdapter2(mdataset,c_nme);
                           mRecyclerView.setAdapter(mAdapter);
 
                       }
