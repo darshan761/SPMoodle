@@ -7,10 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
-/**
- * Created by HP on 30-10-2018.
- */
+                                                  /**
+                                                                         *                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Created by HP on 30-10-2018.
+                 */
 public class MyAdapter1 extends RecyclerView.Adapter<MyAdapter1.MyViewHolder> {
     private ArrayList<String> mDataset ;
 

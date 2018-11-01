@@ -22,6 +22,7 @@ public class Personal extends AppCompatActivity {
     private Button sve;
     private Button edit;
     private FirebaseAuth mauth = FirebaseAuth.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,19 +31,17 @@ public class Personal extends AppCompatActivity {
         email = findViewById(R.id.user_email);
         UID = findViewById(R.id.uid);
         Class = findViewById(R.id.user_clss);
-        sve = (Button) findViewById(R.id.save);
-        edit = (Button)findViewById(R.id.edit);
+        sve =  findViewById(R.id.save);
+        edit =  findViewById(R.id.edit);
         DatabaseReference Ref = FirebaseDatabase.getInstance().getReference();
-        Ref.child("Users").child("Students").addValueEventListener(new ValueEventListener() {
+        Ref.child("Users").orderByChild("email").equalTo(mauth.getCurrentUser().getEmail()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot x: dataSnapshot.getChildren()){
-                   if( x.child("email").getValue().toString().equals(mauth.getCurrentUser().getEmail())){
-                        name.setText(x.child("name").getValue().toString());
-                        email.setText(mauth.getCurrentUser().getEmail());
-                        UID.setText(x.child("uid").getValue().toString());
-                        Class.setText(x.child("dept").getValue().toString());
-                    }
+                for (DataSnapshot x : dataSnapshot.getChildren()) {
+                    name.setText(x.child("name").getValue().toString());
+                    email.setText(mauth.getCurrentUser().getEmail());
+                    UID.setText(x.child("uid").getValue().toString());
+                    Class.setText(x.child("dept").getValue().toString());
                 }
             }
 
@@ -58,8 +57,8 @@ public class Personal extends AppCompatActivity {
                 ref.child("Users").child("Students").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot x : dataSnapshot.getChildren()){
-                            if(x.child("email").getValue().toString().equals(mauth.getCurrentUser().getEmail().toString())){
+                        for (DataSnapshot x : dataSnapshot.getChildren()) {
+                            if (x.child("email").getValue().toString().equals(mauth.getCurrentUser().getEmail().toString())) {
                                 x.child("name").getRef().setValue(name.getText());
                                 x.child("dept").getRef().setValue(Class.getText());
                                 name.setEnabled(false);

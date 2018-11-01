@@ -25,7 +25,7 @@ public class course_display extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_display);
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView = findViewById(R.id.my_recycler_view);
         final ArrayList<Course> mDataset = new ArrayList<Course>();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         mLayoutManager = new LinearLayoutManager(this);

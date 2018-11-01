@@ -18,7 +18,7 @@ public class grading extends AppCompatActivity {
     private SeekBar seekBar,seekBar1,seekBar2,seekBar3;
     private Button submit;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
-    int p1,p2,p3,p4;
+    float p1,p2,p3,p4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +63,7 @@ public class grading extends AppCompatActivity {
         seekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                p2 = progress/10;
+                p2 = progress/5;
             }
 
             @Override
@@ -79,7 +79,7 @@ public class grading extends AppCompatActivity {
         seekBar3.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                p3 = progress/5;
+                p3 = progress/10;
             }
 
             @Override
@@ -95,7 +95,7 @@ public class grading extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int total = p1 + p2 + p3 + p4;
+                final float total = p1 + p2 + p3 + p4;
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
                 ref.child("Exp").child(getIntent().getStringExtra("MEME")).orderByChild("student_name").equalTo(auth.getCurrentUser().getEmail()).addValueEventListener(new ValueEventListener() {
                     @Override

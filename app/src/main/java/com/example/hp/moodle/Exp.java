@@ -15,7 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class Exp extends AppCompatActivity {
+public class    Exp extends AppCompatActivity {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -25,7 +25,6 @@ public class Exp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exp);
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         final String c_nme = getIntent().getStringExtra("Course_name");
         Log.d("boiboi",c_nme);
         mLayoutManager = new LinearLayoutManager(this);

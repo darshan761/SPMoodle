@@ -40,18 +40,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             super(v);
             mTextView = v;
         }
- /*       public enroll(){
-            mTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DatabaseReference Ref = FirebaseDatabase.getInstance().getReference();
-                    DatabaseReference r = Ref.child("enrolled").push();
-                    r.child("student_email").setValue(auth.getCurrentUser().getEmail());
-                    r.child("enrolled_course").setValue(i);
-                    Toast.makeText(v.getContext(),"Enrolled successfully",Toast.LENGTH_SHORT).show();
-                }
-            });
-        }  */
     }
 
 
